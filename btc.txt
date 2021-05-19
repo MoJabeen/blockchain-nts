@@ -1,0 +1,30 @@
+MASTERING BTC NTS
+
+Descrip: This is an overall notes section on the bitcoin, including the full system from wallets, transactions, blocks, mining etc.
+
+GLOSSARY
+
+Transaction ledger - The blockchain
+
+Bitcoin is a fully distributed peer to peer system, with no real coins instead value is implied via signed (for auth - stop counterfiet) transactions.
+
+The bitcoin protocol stack is open source and the protcol communicated via the internet. 
+
+Currency issused via mining at fixed rate with 4 year halfing leading to cap of 21 million by 2040!!
+
+HISTORY
+
+2008 - white paper released by satoshi nakaomoto
+2009 - bitcoin network started
+
+CLIENTS
+
+ - Full (controls full protocol and holds backup of all transaction)
+ - Light (controls wallets, relies on servers for tranasction and network)
+ - Web (Holds nothing, acts as api to servers for protocols)
+
+TRUSTED TRANSACTION
+
+Blockchain explorer - Search engine for tranas using an address
+
+
