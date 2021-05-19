@@ -19,12 +19,36 @@ HISTORY
 
 CLIENTS
 
- - Full (controls full protocol and holds backup of all transaction)
+ - Full Index Node (controls full protocol and holds backup of all transaction)
  - Light (controls wallets, relies on servers for tranasction and network)
- - Web (Holds nothing, acts as api to servers for protocols)
+ - Web (Holds nothing, acts as api to servers for protocols) - use GRPC API to gather unspent transactions
 
 TRUSTED TRANSACTION
 
 Blockchain explorer - Search engine for tranas using an address
+
+Tranasctions are made from inputs that contain the prev tranasction which was encumbered
+The output will be encumbered by using the receivers pub key so that only they can use it via signature
+
+An output will contain change back to the sender if the input doesnt match the payment amount
+Inputs are combined and can be to multiple outputs if required
+
+When sent to the network all nodes (in the peer-peer network) will forward to other nodes any transaction the recieve, within a few seconds the client will recieve from the send the transaction
+
+Clients can be confident if the transaction uses unspent prev transaction and enough transaction fee to be mined
+
+Output != Input //Delta is transaction fee
+
+When a new block is mined the fingerprint of the previous block is used 
+When the solution is found the transaction is added to the blockchain
+After 6 Blocks ontop considered trusted (irrevocable) and irreverable due to comp required for reversal
+
+Full client will check entire transaction history back to mined coin
+Light client will be based on check if its in the blockchain and has blocks ontop
+
+
+THE BITCOIN CLINET (bitcoind , the satoshi client)
+
+btcd - go client
 
 
