@@ -51,4 +51,34 @@ THE BITCOIN CLINET (bitcoind , the satoshi client)
 
 btcd - go client
 
+interesting side mission -------
+
+Eliptical curve crypto (ECC)
+
+Trapdoor func - Math func A->B easy | B->A very hard
+ECC much more secure for the same storage size ie 256 bit 
+
+Eliptic curve - symmetric on the x axis and 3 intercepts on any straight line
+Priv = (n dot^n)
+
+384 - military safe 
+
+bitcoin uses spec256k1
+y^2 = (x^3 + 7) over F_p(modulo prime number p)
+---------------
+
+private key (random 256 bit number) -> pub key (Crypto func (elliptic) -> Address (Hash)
+
+pub key -> Address is SHA256 has then RIPEMD160 Hash ends with 160 bit number
+pub key - prefix + x coor + y coor
+
+Base58Check Encoding (WIF) Wallet import format
+
+Encoded in base58 without 0OlI, with checksum (double hash added to end) to avoid human mistakes
+
+To save data compressed pub keys omit y (cacl using eq) but need a specific prefix to show odd or even (02 even 03 odd)
+priv key compressed (WIF-compressed) outputs compressed pub key and address, priv key uncompressed(WIF) does not
+
+Seeded wallets or determinstic use a seed and hash to generate the priv key. (non determinstic use a bunch of random priv keys)
+Mnemonic code words - Seed can be generated from a bunch of words.
 
