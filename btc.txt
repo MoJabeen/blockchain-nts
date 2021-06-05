@@ -82,3 +82,19 @@ priv key compressed (WIF-compressed) outputs compressed pub key and address, pri
 Seeded wallets or determinstic use a seed and hash to generate the priv key. (non determinstic use a bunch of random priv keys)
 Mnemonic code words - Seed can be generated from a bunch of words.
 
+Child keys made from a hash of parent pub/priv key, chain code and index number.
+The chain code adds randomness so a child cant be used to find another child only on its index.
+
+HD wallets allow easy tracing of pub keys to childs but seperate out the priv key, good for ecommerce (customer needs pub key) server.
+
+Extended key - Comb pub key and chain code
+
+HD wallets issue leaked child priv key makes the master key vunerable
+Use hardened child key (made from priv key in hash not pub)
+
+BIP0043 and BIP0044 - standards for HD wallet structure
+
+standard btc address starts with 1
+P2SH pay to script hash instead uses a script to create the address, encumbering payments to that address with the script. ie used for multi sig proof before use of a transaction.
+
+Vanity address - chosen words in address calculated using brute force
