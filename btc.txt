@@ -98,3 +98,43 @@ standard btc address starts with 1
 P2SH pay to script hash instead uses a script to create the address, encumbering payments to that address with the script. ie used for multi sig proof before use of a transaction.
 
 Vanity address - chosen words in address calculated using brute force
+
+UTXO - Unspent transaction output
+
+Fees calculated based on transaction memory size
+
+If child trans received before parent then stored in temp orphan pool with set number of max stored childs allowed
+
+Script language (turing incompletness and statless (very portable)) simple for security uses stacks (pop and push)
+
+Process is unlock script output -> lock script
+
+5 standards P2PKH (compares pub key hash then checks sig)
+- P2PK (crappy P2PKH)
+- OP_return (store unspendable data 40 bytes)
+- P2SH (compare script hash, then run script) uses script hash as address
+
+
+THE BITCOIN NETWORK
+
+- Uses the bitcoin P2P protocol, other protcols can communicate to the network via the btc P2P protocol
+
+- Pool protocol servers act as gateways to "bridge" between the btc P2P protocol and others such as Stratum
+
+- On start up of a client it will noramlly use seeded other peers to gather the required data (can use specified ip of another peer)
+
+- Will then setup connection to a number of peers
+- During the blockchain download the number of blocks transimtted is limited to not overwhelm the network
+
+- Simple Payment Verifaction nodes (SPV) lightweight mobile nodes, check if the transaction is 6 blocks deep to verify transaction, full node would use a full check of the blockchain.
+
+- SPV only keep track of block headers and (want to know) the transactions they care about. IE thier address related - causes privacy issue if watched.
+
+- To protect from privacy issue use Bloom filters (use hash and array) to make transaction pattern that will match the wanted trans and a other random ones. It is a probabalistic search filter, the more hashes it uses or the smaller the array the less accurate but better privacy.
+
+- Transaction pools held in every node to hold all unconfirmed trans, each node verifies it then adds to pool. Also orphan pools for trans where the parent hasnt been received this could be a long chain triggered to move into trans pool if the head parents is received.
+
+- Alert messages only usable by a few core devs (priv key holder) to show a serious blockchain issue
+
+
+
