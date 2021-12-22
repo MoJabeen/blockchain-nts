@@ -1,8 +1,8 @@
 MASTERING BTC NTS
 
-Descrip: This is an overall notes section on the bitcoin, including the full system from wallets, transactions, blocks, mining etc.
+Auth: Mohammad Jabeen
 
-GLOSSARY
+Purpose: This is an overall notes section on the bitcoin, including the full system from wallets, transactions, blocks, mining etc. Based on the book Mastering bitcoin by Andreas M Antonpoulos
 
 Transaction ledger - The blockchain
 
@@ -117,24 +117,128 @@ Process is unlock script output -> lock script
 
 THE BITCOIN NETWORK
 
-- Uses the bitcoin P2P protocol, other protcols can communicate to the network via the btc P2P protocol
+Uses the bitcoin P2P protocol, other protcols can communicate to the network via the btc P2P protocol
 
-- Pool protocol servers act as gateways to "bridge" between the btc P2P protocol and others such as Stratum
+Pool protocol servers act as gateways to "bridge" between the btc P2P protocol and others such as Stratum
 
-- On start up of a client it will noramlly use seeded other peers to gather the required data (can use specified ip of another peer)
+On start up of a client it will noramlly use seeded other peers to gather the required data (can use specified ip of another peer)
 
-- Will then setup connection to a number of peers
+Will then setup connection to a number of peers
 - During the blockchain download the number of blocks transimtted is limited to not overwhelm the network
 
-- Simple Payment Verifaction nodes (SPV) lightweight mobile nodes, check if the transaction is 6 blocks deep to verify transaction, full node would use a full check of the blockchain.
+Simple Payment Verifaction nodes (SPV) lightweight mobile nodes, check if the transaction is 6 blocks deep to verify transaction, full node would use a full check of the blockchain.
 
-- SPV only keep track of block headers and (want to know) the transactions they care about. IE thier address related - causes privacy issue if watched.
+SPV only keep track of block headers and (want to know) the transactions they care about. IE thier address related - causes privacy issue if watched.
 
-- To protect from privacy issue use Bloom filters (use hash and array) to make transaction pattern that will match the wanted trans and a other random ones. It is a probabalistic search filter, the more hashes it uses or the smaller the array the less accurate but better privacy.
+To protect from privacy issue use Bloom filters (use hash and array) to make transaction pattern that will match the wanted trans and a other random ones. It is a probabalistic search filter, the more hashes it uses or the smaller the array the less accurate but better privacy.
 
-- Transaction pools held in every node to hold all unconfirmed trans, each node verifies it then adds to pool. Also orphan pools for trans where the parent hasnt been received this could be a long chain triggered to move into trans pool if the head parents is received.
+Transaction pools held in every node to hold all unconfirmed trans, each node verifies it then adds to pool. Also orphan pools for trans where the parent hasnt been received this could be a long chain triggered to move into trans pool if the head parents is received.
 
-- Alert messages only usable by a few core devs (priv key holder) to show a serious blockchain issue
+Alert messages only usable by a few core devs (priv key holder) to show a serious blockchain issue
 
+THE BLOCKCHAIN
 
+An ordered back linked-list of blocks
 
+A block can have only one parent but may have muliptle children
+
+Each block is identified by its hash and will contain the previous blocks hash in the header
+
+As the previous blocks hash is used to create the current blocks hash, changing any block will require subsequent changes in blocks
+
+The blocks structure is made 80 bytes of header (4 B of block size, 1-9 Bytes of Transaction counter) and then (average ~ 250B) transactions 
+
+The header includes : Software Version, Previous block hash, merkle root, timestamp, Difficulty target, nonce / 6 things
+
+A blocks hash is the the block header hashed twice
+
+The gensis blocks is stored statically in the client code as a reference point
+
+Verify blocks by comparing prev hash to the prev block in the chain
+
+Merkle trees is a binary hash tree which conatins as leafs pairs of transactions hashed (double hashed) and the resulted hashing paired and hashed till only one root leaf
+
+Used to validate transactions by validating the tree path in a node, at worst O = 2log(N)
+
+Simplified Payment Verfication (SPV) will ask for a merkle path and header within a merkle block message, this will allow the SPV to validate the block and if the transaction is in the block
+
+It does this by calculating and valdiating the root leaf using the path and the transaction.
+
+MINING
+
+A new block is mined apporox every 10 mins, with an adjusting Difficulty to keep this level
+
+Minings main function is to secure the bitcoin network to fraudlent transactions and provide a secure method of consensus
+
+It also incentivies this function by providing newcoins, this coin amount is halfed every 4 years or 210,000 blocks (started at 50 blocks)
+
+Also transaction fees are collected by miners
+
+Miners competete to solve a mathematical problem of producing a hash lower than a threshold for a givin block header
+
+From this competition emereges a conseus mechanism that keeps a consistent track of the current state of the blockchain secure to attacks, called Proof of work
+
+Decentrailised consensus arises from four processes:
+    - Verfication of each tranasction
+    - Aggregrate transactions into a new block verifed via proof of work
+    - Verify new blocks by every node and assembly
+    - Selection of every chain with the most cumulative computation (through Proof of work)
+
+Due to the independant verification of each transaction before relay, all nodes build a pool of valid tranasction in roughly the same order
+
+Tranasctions are prioritised and the highest priorty transactions are first into the block
+
+Priorty = Sum (Value of input * Input age) / Transaction Size
+
+Age of UTXO is the blocks elapsed since the UTXO was recorded
+
+First 50 kilobytes of the block are used for high priorty transactions, the rest is prioritised based fee per kb of transaction
+
+Bitcoin transactions do not have an expiration timeout they will remain in any nodes unsusued transaction pool until restarted
+
+The first transaction added to the block is called the generation transaction, it is the miners reward for mining (new block amount + tranasction fee) 
+
+This transaction does not use a UTXO as an input instead uses coinbase
+
+A generation transaction has no unlocking script, and the transaction hash and output index are set to 0 and 1 respectively
+
+There is also a coinbase data field in the generation transaction, which includes a push operation with the block height and an extra nonce
+
+Example Difficulty Target:
+    - Ox00001601677C5806
+
+The difficulty is normally represented in coefficent exponent form (target = coefficent * 2^(8*(exponent-3)))
+
+The difficulty is calculated by comparing the time take to mine the last 2016 blocks and 20160 minutes
+
+The maximum the difficulty can be altered in one go is a factor of four to avoid voltailty
+
+If there is a fork the chain with the most cumulative difficulty will be chosen as the main chain (ie the chain with the most blocks)
+
+Forks occur if block solutions are found at similar time and the may diverge on the main chain, this will be solved most likley by the next block (whichever chain finds the next block first) as it will be distributed and chosen as the chain with the most difficulty
+
+Miner hashing tech has boomed from CPU to GPU to FPGA to ASICs
+
+Mining pools combine the effort of a number miners to and then share the rewareds between them based on hash provided by each miner
+
+Pools use 'shares' which is roughly 1000x easier than the difficulty target, to measure miner contribution
+
+Pools are generally managed and connected to a full node to construct the new block, but centrealised :( 
+    
+P2Pool is a decentrailsied version using a sharechain to keep track of miner contribution and reward miners
+
+A consensus attack is when a large group of miners attack the consensus mechanism on deciding the new chain or block
+
+A consensus attack will allow double spending or denail of service, by forking off the chain and creating enough blocks to shift the new chain to the main chain
+
+A method to aleviate risk of double spends is using a multi sig account
+
+BITCOIN SECURITY
+
+Bitcoin require no user vetting or encryption, the information can be sent via any public channel
+
+Bitcoin is not vunerable to mass comproise as there is storage of user keys outside the user
+
+Traditional security architecture is based on root of trust, generally software build around this root of trust
+
+The gensis block is the root of trust and a fully validated blockchain can be trusted
