@@ -10,7 +10,7 @@ Bitcoin is a fully distributed peer to peer system, with no real coins instead v
 
 The bitcoin protocol stack is open source and the protcol communicated via the internet. 
 
-Currency issused via mining at fixed rate with 4 year halfing leading to cap of 21 million by 2040!!
+Currency issused via mining at fixed rate with 4 year halfing leading to cap of 21 million by 2140!!
 
 HISTORY
 

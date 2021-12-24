@@ -1,0 +1,8 @@
+MASTERING ETHERUM
+
+Auth: Mohammad Jabeen
+
+Purpose: Description of etherum function and use, based on the book Mastering Etherum by Andreas Antonpoulos
+
+BASICS
+
