@@ -46,7 +46,6 @@ After 6 Blocks ontop considered trusted (irrevocable) and irreverable due to com
 Full client will check entire transaction history back to mined coin
 Light client will be based on check if its in the blockchain and has blocks ontop
 
-
 THE BITCOIN CLINET (bitcoind , the satoshi client)
 
 btcd - go client
@@ -113,7 +112,6 @@ Process is unlock script output -> lock script
 - P2PK (crappy P2PKH)
 - OP_return (store unspendable data 40 bytes)
 - P2SH (compare script hash, then run script) uses script hash as address
-
 
 THE BITCOIN NETWORK
 

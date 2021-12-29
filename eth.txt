@@ -6,3 +6,115 @@ Purpose: Description of etherum function and use, based on the book Mastering Et
 
 BASICS
 
+Etherum is an open sourced, globally decentrailsied computing infrastrucure. It uses blockchain technology to sync the state of the machine after execution of programs called smart contracts.
+
+Ether is the currency used to restrict the computational resources via gas.
+
+Etherum uses a Byzantine fault tolerant consensus algorithm for synch of state updates (Byzantine meaning nodes maybe unreliable)
+
+It has been designed to be unlike btc which has a very limited scripiting language focused on validating transactions to have a general puporse progammable blockchain.
+
+This code runs on the Etherum Virtual Machine (EVM) which is turing complete (can solve any computational problem)
+
+Etherum tracks the state transitions of a general purpose data store, any data expressed a key-value tuple.
+
+Turing completness isnt intrinsically hard, its the managment of resources that is difficulty, etherum solves this using gas (a metering mechanism)
+
+Each instruction has a predetermined cost executed by the EVM, the EVM will exectue until the the gas consumed by the computation exceeds the gas available in the transaction
+
+Ether should be explictly marked for the purchase of gas with a set gas price
+
+A Decentrailised application (DApp) is a smart contract and a web user interface
+
+Web3 is the new age of the internet where apps are built on decentrailsied platforms.
+
+Etherum works on the ethos of move fast and break things, allows for changes that are not backwards compatible (unlike bitcoin)
+
+A current issue is the nature of a blockchain being immutable and deploying code on a changing platform, which means smart contracts arent simple upgraded, they need to redeployed, users need to be migrated and funds may need to start over.
+
+"Bike Shedding" is not an issue under the ETH ethos (building a bike shed at the back of a nuclear station)
+
+SMART CONTRACTS
+
+Two types of accounts externally owned accounts (EOAs) and contracts accounts
+
+EOAs controlled by users via wallet software
+
+Contract accounts are controlled via code or smart contracts, they do not have an assoicated priv key and so control themeselves via the code assoicated.
+
+Smart contracts : An immutable program runs determinstically in the context of the EVM
+    Determinic is key, as the code must execute the same for all miners who run it
+    The smart contract can access their own state, the context of the transaction and info from recent blocks
+
+Smart contracts are deployed using a special contract creation transaction
+
+Using the contracts address a transaction can be spent to send funds or call a function
+
+Contracts run when called by a transaction!, there can be a chain of contracts calling other contracts but the inital trigger is by an EOA
+
+The EVM is a single threaded machine, transactions being atomic.
+
+Any changes in the global state are recorded only if the execution terminates succesfully, if unsuccessful the changes are rolled back but the transaction is still spent
+
+Contracts can be delted if the creator allows this and you are rewarded gas for doing so (SELFDESTRUCT)
+
+Solidity - Java/C++ based language for contracts
+
+Vyper - Python based language for contracts
+
+Bamboo - Lang without loops :O
+
+TOKENS
+
+Tokens on blockchains are entities that can be owned and represent assets, currency or access rights
+
+Possible token uses:
+    - currency
+    - resource
+    - asset
+    - access
+    - equity
+    - voting
+    - collectible
+    - identity
+    - attestation (certificate)
+    - utility
+
+Fungability is the property of something in which units can be essentially interchangable, with no difference in funtion or value
+    If a token has historcal provenance its not techincally fungible
+
+Intrinsic tokens (value based on the blockchain) remove the counter party risk, as you have removed the need for the third party
+
+Equity tokens have legislation issues, people have tried to avoid this by disguising them as utility tokens
+
+ORACLE
+
+Oracles are systems that are an external data store out of the blockchain
+
+They are ideally trustless (they do not need to be trusted as they are run on decentrailsied principles)
+
+In the EVM there can be no randomness due to the required determinstic nature and any data used in a contract is to be provided as part of the payload of a transaction
+
+They can be considered a mechanism for briding the gap between real word info and the blockchain
+
+GAS
+
+Every operation has an associated gas cost ie ADD, HASH etc
+
+Gas acts as a buffer between the volatile price of ether payout to miners and a defense against DOS attacks
+
+The gas cost * gas price is used as the miner fee
+
+The gas price will be speciifed in the transaction and the miner can determine which transactions to accept
+
+The block gas limit is the max gas consumed per block, putting a limit on transactions per block
+
+Miners vote on the gas limit so capacity can be increased or decreased in subsequent blocks
+
+PROOF OF STAKE
+
+Etherums planned PoS algo is Casper
+
+Validators deposit the blockchains currency and therefore can validate blocks, the more currency deposited the larger the weight on validation
+
+If a block is rejected that was staked by a validator they can lose thier deposit
