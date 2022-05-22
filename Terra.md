@@ -67,3 +67,19 @@ Context: Stable coins are assets pegged to the value of of another asset (normal
 - As Luna drops, UST holders fear increases creating sell demand, further incentivasing LUNA minting and selling. Causing further deacrease as supply increase, causing a spiral of death :(.
 
 - Recently due to a number of unfortunatley timed events caused the luna market cap to drop below the UST market cap. Triggering a death spiral to 0.
+
+## Terra Money - Stability and Adoption (White Paper)
+
+Terra is to have the benefits of a crypto (transparency, decentralisation and inclusivity) without the volatile nature. An elastic money supply (returnining to a inital desired position), utilising growth driven features to enable utilisation.
+
+>" If Bitcoin's contribution to cryptocurrency was immutabillity, and Ethereum expressivity, our value-add will be usability."
+
+### What are the key points?
+
+- Terra: Decentralised currencies pegged at local currencies to enable the desired crypto day-day utility.
+- All currencies would share liquidity allowing atomic exchange.
+- Utilise an decentralised price oracle for determing exchange rate.
+
+- Mining would absorb the voltaily of the stable coins (via miniting coins, arbitrage and seigniorage).
+- Ensure miners are incetivised via stable growth by controlling transaction fees and burnining luna depending on economic movements.
+- Fiscal spending to enable terra econmoic growth by using stored seigniorage to fund new dApps in a progammatically weighted method.
