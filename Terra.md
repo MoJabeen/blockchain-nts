@@ -1,4 +1,4 @@
-Description: Overview of the terra crash and how the different elements of the system work. 
+Description: Overview of the terra and how the different elements of the system work. 
 
 ## When was terra founded ?
 
