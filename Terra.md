@@ -83,3 +83,13 @@ Terra is to have the benefits of a crypto (transparency, decentralisation and in
 - Mining would absorb the voltaily of the stable coins (via miniting coins, arbitrage and seigniorage).
 - Ensure miners are incetivised via stable growth by controlling transaction fees and burnining luna depending on economic movements.
 - Fiscal spending to enable terra econmoic growth by using stored seigniorage to fund new dApps in a progammatically weighted method.
+
+# Sources
+
+**Coin Bureau, Youtube**, Overview of terra and explanation of the collapase: https://www.youtube.com/watch?v=0CutSymg94I&t=171s
+
+**"Terra Money: Stability and Adoption"** : https://assets.website-files.com/611153e7af981472d8da199c/618b02d13e938ae1f8ad1e45_Terra_White_paper.pdf
+
+**What Is Terra? The Algorithmic Stablecoin Protocol Explained, Liam J. Kelly and Robert Stevens** : https://decrypt.co/resources/what-is-terra-algorithmic-stablecoin-protocol-explained
+
+**The Death Spiral: How Terra’s Algorithmic Stablecoin Came Crashing Down, Rahul Rai** : https://www.forbes.com/sites/rahulrai/2022/05/17/the-death-spiral-how-terras-algorithmic-stablecoin-came-crashing-down/?sh=64c0a9171a26 
