@@ -114,3 +114,80 @@ A child transaction is one based of the parent transaction.
   - Used for multi sig - that require more complex sigs.
   - Burden in on the recipient not sender
 
+## The Bitcoin Network
+
+### How is the bitcoin network structured ?
+
+The bitcoin network is a peer to peer network, there is no centralised server all nodes facilitate the network. The nodes provide and consume services.
+
+- **The bitcoin network runs the bitcoin P2P protocol**. Other protocols can communicate with the network via bridge servers through the P2P protocol (Stratum is a protocol used for pooled mining).
+
+- On node startup, there will generally be stored seeded nodes to be used for gathering required initial data. 
+
+### What are some of the different types of nodes on the network?
+
+- Reference Client (Contains wallet, miner, full blockchain database and Network routing)
+
+- Full blockchain node (Full blockchain database and network routing)
+
+- Solo Miner (Miner, blockchain, networking)
+
+- Light-weight (Simple Payment Verification) (Wallet and network) ; Checks if transactions are at least 6 blocks deep to verify.
+- Mining Nodes (Mining function and mining protocol)
+
+### How do Lightweight nodes work?
+
+- Only block headers are downloaded and not the full transaction list. The UTXOs available for spending is built by relying on peers to provide views of the relevant parts on demand.
+- SPV nodes are dependant on other full nodes doing the complete verification and use this as a proxy to validate transactions.
+
+### What is a bloom filter ?
+
+Used by SPV filters to communicate with peer nodes asking for transaction data without revealing exactly which address they are searching for.
+
+- A bloom filter filters outs the transactions it is being sent to leave only transactions needed by the wallet. The choice between accuracy and privacy (sending more non relevant transaction) can be made when setting the bloom filter.
+
+### Who can trigger alert messages ?
+
+Few keys devs with the correct private key can trigger an alert messages to show a serious blockchain issue.
+
+## The blockchain
+
+### What is the blockchain made of ?
+
+A blockchain is an ordered linked list of blocks containing data. Each block refers to the previous block creating a chain.
+
+- Each block is easily identified by its hash and will contain the previous blocks hash.
+  - Creating a hash uses the data in the block and therefore changes in that data result in changes in the hash.
+
+- As each block points to the previous block, changes in a block will require changes in all subsequent blocks.
+
+### What is a block made of ?
+
+- A blocks structure contains 80 bytes of header
+- The header includes:
+  - Software version
+  - Previous block hash
+  - Merkle Root
+  - Timestamp
+  - Difficulty target
+  - Nonce
+
+### How do you create a blocks hash ?
+
+- The blocks header hashed twice
+- The blocks header includes the previous blocks hash, so changing the previous block will change the next blocks hash
+
+### What is the genesis block?
+
+- The genesis block is the first ever block on the bitcoin chain.
+- This block is stored statically in clients code as a reference point to build the chain on.
+  
+### What are Merkle trees ?
+
+- Merkle trees are a binary hash tree which is structured as each leaf being a pair of transactions hashed, the resulting hash paired with another leaf and hashed again.
+  - Until only on root leaf at the top.
+- A more efficent method of validating transactions by validating a path through the tree for a transaction. Gives at worst 0 = 2log(N)
+- SPV nodes ask for a merkle path and block header, allowing the node to validate if the transaction is in the block
+- Rebuilds the path and then confirms if it matches the root leaf hash.
+
+## Mining
