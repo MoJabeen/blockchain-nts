@@ -161,7 +161,7 @@ A blockchain is an ordered linked list of blocks containing data. Each block ref
 
 - As each block points to the previous block, changes in a block will require changes in all subsequent blocks.
 
-### What is a block made of ?
+### What is a block made of ?
 
 - A blocks structure contains 80 bytes of header
 - The header includes:
