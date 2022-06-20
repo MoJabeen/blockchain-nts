@@ -191,3 +191,85 @@ A blockchain is an ordered linked list of blocks containing data. Each block ref
 - Rebuilds the path and then confirms if it matches the root leaf hash.
 
 ## Mining
+
+Mining is the method of adding security to the blockchain, meaning a method of preventing malicious tampering of the data stored in the blockchain. It also enables the consensus mechanism proof of work.
+
+Miners hash the blocks header attempting to solve the network problem by altering the nonce, when a miner solves this problem the associated block is added to the chain.
+
+### How often is a block mined ?
+
+- A new block is mined every 10 minutes, the network maintains this rate by varying the 'difficulty' causing blocks to be mined as the number of miners fluctuates.
+
+### How do you incentivize mining ?
+
+- Mining is incentivised by providing new coins to the miners, to keep the market deflationary the number of new coins mined is halved every 4 years. 
+- Total bitcoins mined will be 21 million by 2140.
+- Transaction fees are also collected by miners.
+
+### What do miners do ?
+
+- Miners are competing to solve a math problem of producing a hash lower than a threshold number for a given block.
+- This competition enables the consensus mechanism proof of work. 
+
+**Decentralized consensus is from four processes:** 
+- Verification of each transaction by nodes
+- Aggregate transactions into a new block verified via proof of work
+- Verify new blocks by nodes
+- Selection of the chain with the most cumulative computation
+
+### How is a block built ?
+
+- Due to the independent verification of each transaction, all nodes generally fill a pool of transactions that are the same.
+- Transactions will be prioritized, with the highest priority placed into the block first.
+
+> Priority = Value of input * input Age / Transaction size
+  - Age of the UTXO is the blocks deep, transaction size is in bytes.
+
+- The transactions are considered high priority if they have a value over 57,600,000 which equals (1 btc * 1 one day)/250 B
+- High priority transactions are the first 50 kB of the blocks
+- The rest is prioritized based on transaction fee per kb
+
+- The first transaction added to the block is called the generation transaction; this is the miners reward (minted coins + transaction fee)
+  - The generation transaction does not use UTXO as an input, instead uses **coinbase**
+
+### How is the difficulty value normally represented ?
+
+- The difficulty value is represented in coefficient exponent form:
+- The first 2 hex digits are the exponent
+- Next 6 digits are the coefficient
+
+> Difficulty Target = coefficient * 2^(8*(exponent-3)) 
+
+### How is the difficulty adjusted ?
+
+> New Difficulty = Old Difficulty * (Actual Time of Last 2016 blocks/ 20160 mins)
+
+### What happens if there is a fork of the chain (two different chains) ?
+
+- The chain with the **the most cumulative work** will be chosen (the longest chain)
+- Forks can occur when differing block solutions are found at a similar time and two chains temporarily exist
+  - This is solved when a block is next added to either chain as this will then be taken as the main chain as it has the most work.
+
+- The 10 min gap is a choice of how much security each block is receiving
+
+### How has mining hardware changed ?
+
+- Initially all miners were CPU based, however as the market adjusted with the price of bitcoin it became economically viable to use GPUs.
+- This was then taken to the next level of custom ASIC devices, designed specifically to maximise the performance of bitcoin miners (maximizing the density, power and hashrate)
+
+### How do mining pools work ?
+
+- Pools are a method of combining the work of large collections of miners to greatly increase the likelihood of receiving the reward from mining.
+- Pools use shares which are roughly 1000x easier than the difficulty target, to measure miner contribution.
+- Pools are connected to a full node to construct blocks, but centralised :(
+
+### Are there decentralised pools ?
+
+- P2Pool is a decentralised version using a sharechain to keep track of miner contribution and rewards.
+
+### What is a consensus attack ?
+
+- A large group of miners attack the consensus mechanism deciding the new block
+- This attack will allow double spending or denial of service, forking off the chain and creating enough blocks to shift the consensus to the new chain
+  - This attack does not allow non signed transactions
+
