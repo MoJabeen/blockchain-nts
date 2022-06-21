@@ -1,4 +1,4 @@
-Description: Summary of the points from the book Mastering BTC.
+Description: Summary of the points from the book Mastering BTC by Andreas Antonopoulos.
 
 # Mastering BTC
 
